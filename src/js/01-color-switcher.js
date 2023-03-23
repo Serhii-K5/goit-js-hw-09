@@ -11,7 +11,7 @@ let firstValue = 0;
 btnStop.addEventListener('click', () => {
   clearInterval(firstValue);
   btnStart.disabled = false;
-  //btnStop.disabled = true;
+  btnStop.disabled = true;
 });
   
 btnStart.addEventListener('click', () => {
