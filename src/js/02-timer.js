@@ -12,6 +12,7 @@ const spanMinutes = document.querySelector('[data-minutes]');
 const spanSeconds = document.querySelector('[data-seconds]');
 
 btnStart.disabled = true;
+let TIMER_DELAY = 1000;
 
 const options = {
   enableTime: true,
@@ -56,11 +57,14 @@ btnStart.addEventListener('click', () => {
     let referenceTime = new Date(inputText.value) - new Date();
     btnStart.disabled = true;    
     // creating a shimmering effect
-    flag *= -1;
-    divTimer.style.color = (flag < 0 && referenceTime < 5500) ? 'red' : 'black';
-    if (flag < 0) {
-      return;
-    };
+    if(referenceTime < 6500){
+      TIMER_DELAY = 500;
+      flag *= -1;
+      divTimer.style.color = (flag < 0 && referenceTime < 5500) ? 'red' : 'black';
+      if (flag < 0) {
+        return;
+      };
+    }
     
     if (referenceTime >= 0) {
       let conversionResult = convertMs(referenceTime);
@@ -73,5 +77,7 @@ btnStart.addEventListener('click', () => {
       Notiflix.Notify.success('Countdown finished');
       clearInterval(timerId);
     }    
-  }, 500);
+  }, TIMER_DELAY);
+
+  TIMER_DELAY = 1000;
 });
